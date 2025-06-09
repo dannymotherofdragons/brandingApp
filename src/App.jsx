@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from "react";
 import MoodPicker from "./components/MoodPicker";
 import PaletteDisplay from "./components/PaletteDisplay";
 import PaletteControls from "./components/PaletteControls";
 import { generatePalette } from "./components/ColorHelpers";
-
+import EmailGate from "./components/EmailGate";
+import { useState, useMemo } from "react";
 //default export
+
 export default function ColorMood() {
   const [primary, setPrimary] = useState(null);
   const [secondary, setSecondary] = useState(null);
@@ -15,6 +16,7 @@ export default function ColorMood() {
     () => generatePalette({ primary, secondary, numberofColors }),
     [primary, secondary, numberofColors, shuffleKey]
   );
+  const canCopy = !!localStorage.getItem("colorMoodEmail");
 
   const handleMoodPick = (mood) => {
     if (primary === mood) {
@@ -32,6 +34,7 @@ export default function ColorMood() {
   };
 
   return (
+    //<EmailGate>
     <div className="flex flex-col items-center gap-6 py-10">
       <h1 className="text-4xl font-bold">ColorMood</h1>
 
@@ -42,7 +45,11 @@ export default function ColorMood() {
         onPick={handleMoodPick}
       />
 
-      <PaletteDisplay palette={palette} shuffleKey={shuffleKey} />
+      <PaletteDisplay
+        palette={palette}
+        shuffleKey={shuffleKey}
+        canCopy={canCopy}
+      />
 
       <PaletteControls
         numberofColors={numberofColors}
