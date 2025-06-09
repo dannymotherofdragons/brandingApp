@@ -36,7 +36,7 @@ export default function ColorMood() {
   return (
     //<EmailGate>
     <div className="flex flex-col items-center gap-6 py-10">
-      <h1 className="text-4xl font-bold">ColorMood</h1>
+      <h1 className="text-4xl font-bold">Hex Marks the Spot 🔮</h1>
 
       <p className="text-lg">Primary & Secondary mood</p>
       <MoodPicker
